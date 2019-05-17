@@ -21,34 +21,6 @@ module.exports = {
   },
   module: {
     rules: [
-      { 
-        test: /\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              modules: 'global',
-              import: true
-            }
-          },
-          'sass-loader',
-          'postcss-loader'
-        ] 
-      },
-      { 
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              modules: 'global',
-              import: true
-            }
-          }
-        ] 
-      },
       {
         test: /\.m?js$/,
         exclude: /node_modules/,

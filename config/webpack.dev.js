@@ -10,12 +10,39 @@ const devConfig =  {
     open: false,
     hot: true
   },
+  module: {
+    rules: [
+      { 
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: 'global',
+              import: true
+            }
+          },
+          'sass-loader',
+          'postcss-loader'
+        ] 
+      },
+      { 
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: 'global',
+              import: true
+            }
+          }
+        ] 
+      }
+    ]
+  },
   plugins: [
-    new MiniCssExtractPlugin({
-      hmr: true,
-      reloadAll: true,
-      filename: 'css/[name].css'
-    }),
     new webpack.HotModuleReplacementPlugin()
   ],
   optimization: {

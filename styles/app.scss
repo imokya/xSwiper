@@ -25,6 +25,9 @@ html, body {
 
 .swiper-slide {
   height: 100%;
+  & > div {
+    height: 100%;
+  }
 }
 
 
