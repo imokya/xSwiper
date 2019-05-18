@@ -68,6 +68,5 @@ module.exports = (env) => {
   } else {
     return config
   }
-  
 }
 
