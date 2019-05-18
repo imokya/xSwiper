@@ -1,5 +1,6 @@
 const merge = require('webpack-merge')
 const commonConfig = require('./webpack.common.js')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const prodConfig =  {
   mode: 'production',
@@ -34,7 +35,13 @@ const prodConfig =  {
         ] 
       }
     ]
-  }
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css',
+      chunkFilename: 'css/[id].css'
+    })
+  ]
 }
 
 module.exports = merge(commonConfig, prodConfig)

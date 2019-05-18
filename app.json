@@ -3,5 +3,8 @@
     "pages/home",
     "pages/story",
     "pages/about"
-  ]
+  ],
+  "title": "xing h5",
+  "version": "1",
+  "viewport": "750"
 }

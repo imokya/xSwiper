@@ -1,8 +1,7 @@
 const path = require('path')
+const config = require('../app.json')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-
 
 module.exports = {
   entry: {
@@ -38,17 +37,14 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      config: config,
       inject: false,
-      template: 'template/index.html',
+      template: 'template/index.ejs',
       filename: 'index.html'
     }),
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: ['*', '!vendors*'],
       root: path.resolve(__dirname, '../')
-    }),
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
-      chunkFilename: 'css/[id].css'
     })
-  ]
+  ],
 }
