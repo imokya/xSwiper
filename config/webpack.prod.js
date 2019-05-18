@@ -60,13 +60,5 @@ const imageCompressConfig =  {
   ]
 }
 
-const config = merge(commonConfig, prodConfig)
-
-module.exports = (env) => {
-  if(env && env === 'imagemin') {
-    return merge(config, imageCompressConfig)
-  } else {
-    return config
-  }
-}
+module.exports = merge(commonConfig, prodConfig)
 
