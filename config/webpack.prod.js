@@ -1,6 +1,8 @@
 const merge = require('webpack-merge')
-const commonConfig = require('./webpack.common.js')
+const glob = require('glob')
+const ImageminPlugin = require('imagemin-webpack-plugin').default
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const commonConfig = require('./webpack.common.js')
 
 const prodConfig =  {
   mode: 'production',
@@ -44,4 +46,28 @@ const prodConfig =  {
   ]
 }
 
-module.exports = merge(commonConfig, prodConfig)
+const imageCompressConfig =  {
+  plugins: [
+    new ImageminPlugin({
+      pngquant: {
+        quality: '60-70'
+      },
+      externalImages: {
+        context: '../build', 
+        sources: glob.sync('build/img/**/*.png')
+      }
+    })
+  ]
+}
+
+const config = merge(commonConfig, prodConfig)
+
+module.exports = (env) => {
+  if(env && env === 'imagemin') {
+    return merge(config, imageCompressConfig)
+  } else {
+    return config
+  }
+  
+}
+

@@ -9,7 +9,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config ./config/webpack.dev.js",
-    "build": "webpack --config ./config/webpack.prod.js"
+    "build": "webpack --config ./config/webpack.prod.js",
+    "imagemin": "webpack --env=imagemin --config ./config/webpack.prod.js"
   },
   "keywords": [
     "xing h5 framework"
@@ -32,6 +33,7 @@
     "css-loader": "^2.1.1",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
+    "imagemin-webpack-plugin": "^2.4.2",
     "mini-css-extract-plugin": "^0.6.0",
     "node-sass": "^4.12.0",
     "postcss-loader": "^3.0.0",

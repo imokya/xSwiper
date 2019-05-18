@@ -43,7 +43,7 @@ module.exports = {
       filename: 'index.html'
     }),
     new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['*', '!vendors*'],
+      cleanOnceBeforeBuildPatterns: ['*', '!vendors*', '!img*'],
       root: path.resolve(__dirname, '../')
     })
   ],
