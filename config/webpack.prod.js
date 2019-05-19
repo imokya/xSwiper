@@ -3,6 +3,8 @@ const glob = require('glob')
 const ImageminPlugin = require('imagemin-webpack-plugin').default
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const commonConfig = require('./webpack.common.js')
+const AssetsManifestWebpackPlugin = require('../plugins/assets-manifest-webpack-plugin')
+const path = require('path')
 
 const prodConfig =  {
   mode: 'production',
@@ -39,6 +41,11 @@ const prodConfig =  {
     ]
   },
   plugins: [
+    new AssetsManifestWebpackPlugin({
+      source: '../build/img',
+      exclude: 'exclude',
+      output: '../src'
+    }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
       chunkFilename: 'css/[id].css'
