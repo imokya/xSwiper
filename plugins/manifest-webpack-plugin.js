@@ -16,27 +16,24 @@ class ManifestWebpackPlugin {
     const manifest = []
     this.getFolderInfo(this.src, manifest)
     const data = JSON.stringify(manifest)
+    console.log(manifest)
     fs.writeFileSync(this.des + path.sep + 'manifest.json', data, { flag: 'w' })
   }
 
-  getFolderInfo(folder, manifest) {
+  getFolderInfo(folder, manifest, prefix = '') {
     const info = fs.readdirSync(folder, {
       withFileTypes: true
     })
+    const newPrefix = prefix ?  prefix + '/' : prefix
     info.forEach((item) => {
       if(item.isDirectory()) {
         const newFolder = path.join(folder, item.name)
         const obj = {}
         obj[item.name] = [], manifest.push(obj)
-        this.getFolderInfo(newFolder, obj[item.name])
+        this.getFolderInfo(newFolder, obj[item.name], newPrefix + item.name)
       } else {
-        let prefix = folder.replace(this.src, '')
-        prefix = prefix.replace(/\\/g, '/')
-        prefix = prefix.replace(/(^\/)|(\/$)/g, '')
-        prefix = prefix ? prefix + '/' : prefix
-        manifest.push(prefix + item.name)
+        manifest.push(newPrefix + item.name)
       }
-      
     })
   }
 
