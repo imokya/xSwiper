@@ -2,6 +2,7 @@ const path = require('path')
 const config = require('../app.json')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const ManifestWebpackPlugin = require('../plugins/manifest-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -37,6 +38,12 @@ module.exports = {
     ]
   },
   plugins: [
+    new ManifestWebpackPlugin({
+      disable: false,
+      source: '../build/img',
+      exclude: 'exclude',
+      output: '../src'
+    }),
     new HtmlWebpackPlugin({
       config: config,
       inject: false,

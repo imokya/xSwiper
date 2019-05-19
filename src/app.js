@@ -1,4 +1,5 @@
 import config from 'root/app.json'
+import manifest from './manifest.json'
 import 'styles/app.scss'
 
 let swiper
@@ -6,6 +7,7 @@ let swiper
 const app = {
 
   init() {
+    this.manifest = manifest
     this.createDom()
     this.createSwiper()
   },
