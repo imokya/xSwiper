@@ -7,8 +7,8 @@
 * 自动预加载列表
 
 ### How to
-开发 npm run dev
-产品 npm run build
+npm run dev
+npm run build
 
 ### ToDos
 * 单页路由支持
