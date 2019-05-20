@@ -13,6 +13,6 @@
 
 ### Usage
 ```
-npm run dev
-npm run build 
+开发模式 npm run dev
+产品模式 npm run build 
 ```
