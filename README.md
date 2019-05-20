@@ -6,6 +6,10 @@
 * CSS模块化支持
 * 自动预加载列表
 
+### How to
+开发 npm run dev
+产品 npm run build
+
 ### ToDos
 * 单页路由支持
 * 单页微信分享
