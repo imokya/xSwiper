@@ -7,12 +7,27 @@ let swiper
 const app = {
 
   init() {
-    this.manifest = manifest
-    this.createDom()
+    this.initAssets()
+    this.createDoms()
     this.createSwiper()
   },
 
-  createDom() {
+  initAssets() {
+    this.assets = []
+    this.getAssets(manifest, this.assets)
+  },
+
+  getAssets(arr, assets) {
+    arr.forEach((item) => {
+      if(typeof(item) === 'string') {
+        assets.push(item)
+      } else {
+        this.getAssets(Object.values(item)[0], assets)
+      }
+    })
+  },
+
+  createDoms() {
     this.rootEl = document.createElement('div')
     this.wrapEl = document.createElement('div')
     this.rootEl.classList.add('swiper-container')
@@ -33,12 +48,26 @@ const app = {
       } 
       slide.default.app = app
       slide.default.el = tempEl.firstChild
+      this.initPageAssets(slide.default, page)
       this.slides.push(slide.default)
       this.slideElems.push(tempEl.innerHTML)
     })
     this.rootEl.appendChild(this.wrapEl)
     this.appEl = document.querySelector('#app')
     this.appEl.appendChild(this.rootEl)
+  },
+
+  initPageAssets(slideObj, path) {
+    let page = path.split('/')[1]
+    let assets = []
+    for(let item of manifest) {
+      if(typeof(item) === 'object') {
+        if(Object.keys(item)[0] === page) {
+          this.getAssets(Object.values(item)[0], assets)
+        }
+      }
+    }
+    slideObj.assets = assets
   },
 
   createSwiper() { 

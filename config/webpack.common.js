@@ -32,7 +32,10 @@ module.exports = {
         test: /\.(html)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'html-loader'
+          loader: 'html-loader',
+          options: {
+            attrs: false
+          }
         }
       }
     ]

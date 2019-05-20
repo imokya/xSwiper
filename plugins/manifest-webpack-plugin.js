@@ -16,7 +16,6 @@ class ManifestWebpackPlugin {
     const manifest = []
     this.getFolderInfo(manifest)
     const data = JSON.stringify(manifest)
-    console.log(manifest)
     fs.writeFileSync(this.des + path.sep + 'manifest.json', data, { flag: 'w' })
   }
 
