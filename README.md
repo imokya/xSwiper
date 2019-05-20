@@ -12,5 +12,7 @@
 * 全局版本号缓存控制
 
 ### Usage
-    npm run dev
-    npm run build 
+```
+npm run dev
+npm run build 
+```
