@@ -6,11 +6,11 @@
 * CSS模块化支持
 * 自动预加载列表
 
-### How to
-    npm run dev
-    npm run build 
-
 ### ToDos
 * 单页路由支持
 * 单页微信分享
 * 全局版本号缓存控制
+
+### Usage
+    npm run dev
+    npm run build 
