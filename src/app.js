@@ -129,7 +129,6 @@ const app = {
       }
     })
   }
-
 }
 
 app.init()
