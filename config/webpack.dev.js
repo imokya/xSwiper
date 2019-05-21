@@ -5,6 +5,7 @@ const commonConfig = require('./webpack.common.js')
 
 const devConfig =  {
   mode: 'development',
+  devtool: 'source-map',
   devServer: {
     contentBase: './build',
     open: false,

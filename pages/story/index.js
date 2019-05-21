@@ -1,5 +1,4 @@
 export default {
-  hash: 'story',
   init() {
     console.log('init story')
   },

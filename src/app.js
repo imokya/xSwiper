@@ -1,15 +1,27 @@
 import config from 'root/app.json'
 import manifest from './manifest.json'
+import Router from './utils/router'
 import 'styles/app.scss'
 
-let swiper
+
+let swiper, router
 
 const app = {
 
   init() {
+    this.initRouter()
     this.initAssets()
-    this.createDoms()
-    this.createSwiper()
+    this.initSlides()
+    this.initSwiper()
+  },
+
+  initRouter() {
+    router = new Router()
+    router.add(':path', (path)=> {
+      const index = this.slidePaths.indexOf(path)
+      swiper.slideTo(index)
+    })
+    router.listen()
   },
 
   initAssets() {
@@ -27,12 +39,13 @@ const app = {
     })
   },
 
-  createDoms() {
+  initSlides() {
     this.rootEl = document.createElement('div')
     this.wrapEl = document.createElement('div')
     this.rootEl.classList.add('swiper-container')
     this.wrapEl.classList.add('swiper-wrapper')
     this.slideElems = []
+    this.slidePaths = []
     this.slides = []
 
     config.pages.forEach((page) => {
@@ -48,8 +61,11 @@ const app = {
       } 
       slide.default.app = app
       slide.default.el = tempEl.firstChild
+      const slidePath = page.split('/')[1]
+      slide.default.path = slidePath
       this.initPageAssets(slide.default, page)
       this.slides.push(slide.default)
+      this.slidePaths.push(slidePath)
       this.slideElems.push(tempEl.innerHTML)
     })
     this.rootEl.appendChild(this.wrapEl)
@@ -70,9 +86,15 @@ const app = {
     slideObj.assets = assets
   },
 
-  createSwiper() { 
+  initSwiper() { 
+    const path = router.path.split('/')[0] || 
+                 this.slidePaths[0]
+    const slideIndex = this.slidePaths.indexOf(path)
+    let inited = false
     swiper = new Swiper('.swiper-container', {
       effect: 'fade',
+      initialSlide: slideIndex,
+      runCallbacksOnInit: false,
       fadeEffect: {
         crossFade: true
       },
@@ -83,24 +105,26 @@ const app = {
       },
       on: {
         init() {
-          const curSlide = app.slides[0]
+          const curSlide = app.slides[slideIndex]
           if(curSlide && curSlide.init) curSlide.init()
-          if(curSlide.hash) {
-            location.hash = curSlide.hash
+          router.go(curSlide.path)
+          inited = true
+        },
+        slideChange() {
+          if(inited) {
+            const curSlide = app.slides[swiper.activeIndex]
+            if(curSlide && curSlide.init) curSlide.init()
+            router.go(curSlide.path)
           }
         },
-        transitionStart() {
-          const curSlide = app.slides[swiper.activeIndex]
-          if(curSlide && curSlide.init) curSlide.init()
-          if(curSlide.hash) {
-            location.hash = curSlide.hash
+        slideChangeTransitionEnd() {
+          if(inited) {
+            const curSlide = app.slides[swiper.activeIndex]
+            const preSlide = app.slides[swiper.previousIndex] 
+            if(preSlide && preSlide.destroy) preSlide.destroy()
+            if(curSlide && curSlide.start) curSlide.start()
           }
-        },
-        transitionEnd() {
-          const curSlide = app.slides[swiper.realIndex]
-          const preSlide = app.slides[swiper.previousIndex] 
-          if(preSlide && preSlide.destroy) preSlide.destroy()
-          if(curSlide && curSlide.start) curSlide.start()
+          inited = true
         }
       }
     })

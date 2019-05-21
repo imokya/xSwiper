@@ -1,5 +1,4 @@
 export default {
-  hash: 'home',
   init() {
     console.log('init home')
   },
