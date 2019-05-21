@@ -1,5 +1,5 @@
 # xing-h5
-基于webpack构建的脚手架，可以用来方便的创建手机端web app项目，持续完善中。
+基于webpack构建的脚手架，可以用来方便的创建手机端单页web app项目，持续完善中。
 
 ### Features
 * 支持页面事件
