@@ -1,6 +1,7 @@
 import config from 'root/app.json'
 import manifest from './manifest.json'
 import Router from './utils/router'
+import Event from './utils/event'
 import 'styles/app.scss'
 
 
@@ -94,7 +95,6 @@ const app = {
     swiper = new Swiper('.swiper-container', {
       effect: 'fade',
       initialSlide: slideIndex,
-      runCallbacksOnInit: false,
       fadeEffect: {
         crossFade: true
       },
@@ -108,6 +108,7 @@ const app = {
           const curSlide = app.slides[slideIndex]
           if(curSlide && curSlide.init) curSlide.init()
           router.go(curSlide.path)
+          alert(location.href)
           inited = true
         },
         slideChange() {
@@ -132,3 +133,6 @@ const app = {
 }
 
 app.init()
+
+app.router = router
+window.app = app

@@ -1,48 +1,52 @@
-let options, routes = []
-let hashChangeHandler
+import Event from './event'
 
-class Router {
+let _options, _routes = []
+let _hashChangeHandler
+
+class Router extends Event {
 
   constructor(params) {
-    options = Object.assign({
+    super()
+    _options = Object.assign({
       prefix: '/',
       mode: 'hash'
     }, params)
   }
 
   go(path) {
-    location.hash = options.prefix + path
+    location.hash = _options.prefix + path
   }
 
   check() {
-    for(let route of routes) {
+    for(let route of _routes) {
       route.re = route.re.replace(/:[^\/]+/ig, '([^\/]+)')
       route.re = route.re.replace('/', '\\/')
       const matches = this.path.match(route.re)
       if(matches) {
         matches.shift()
         route.func.apply({}, matches)
+        this.emit('change')
       }
     }
   }
 
   listen() {
-    hashChangeHandler = this._onHashChange.bind(this)
-    window.addEventListener('hashchange', hashChangeHandler)
+    _hashChangeHandler = this._onHashChange.bind(this)
+    window.addEventListener('hashchange', _hashChangeHandler)
   }
 
   add(re, func) {
     const isExist = this._isExist(re, func)
     if(!isExist) {
-      routes.push({re, func})
+      _routes.push({re, func})
     }
   }
 
   remove(re, func) {
-    for(let i of routes) {
-      const route = routes[i]
+    for(let i of _routes) {
+      const route = _routes[i]
       if(re === route.re && func === route.func) {
-        routes.splice(i, 1)
+        _routes.splice(i, 1)
         break
       }
     }
@@ -50,7 +54,7 @@ class Router {
 
   destroy() {
     routes = []
-    window.removeEventListener('hashchange', hashChangeHandler)
+    window.removeEventListener('hashchange', _hashChangeHandler)
   }
 
   get path() {
@@ -62,7 +66,7 @@ class Router {
   }
 
   _isExist(re, func) {
-    for(let route of routes) {
+    for(let route of _routes) {
       if(re === route.re && func === re.func) {
         return true
       }
