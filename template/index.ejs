@@ -12,16 +12,14 @@
   <meta name="format-detection" content="telephone=no"> 
   <meta name="x5-orientation" content="portrait">
   <meta name="x5-fullscreen" content="true">
-  <link rel="stylesheet" href="<%= webpackConfig.output.publicPath %>vendors/swiper/swiper.min.css?v=<%= htmlWebpackPlugin.options.config.version %>">
-  <% if (webpackConfig.mode == 'production') { %>
-    <link rel="stylesheet" href="<%= webpackConfig.output.publicPath %>css/app.css?v=<%= htmlWebpackPlugin.options.config.version %>">
-  <% } %> 
+  <% for (var css in htmlWebpackPlugin.files.css) { %>
+    <link href="<%= htmlWebpackPlugin.files.css[css] %>?v=<%= htmlWebpackPlugin.options.config.version %>" rel="stylesheet">
+  <% } %>
 </head>
 <body>
   <div id="app"></div>
-  <script src="<%= webpackConfig.output.publicPath %>vendors/zepto.min.js?v=<%= htmlWebpackPlugin.options.config.version %>"></script>
-  <script src="<%= webpackConfig.output.publicPath %>vendors/swiper/swiper.min.js?v=<%= htmlWebpackPlugin.options.config.version %>"></script>
-  <script src="<%= webpackConfig.output.publicPath %>vendors/wechat.min.js?v=<%= htmlWebpackPlugin.options.config.version %>"></script>
-  <script src="<%= webpackConfig.output.publicPath %>js/app.js?v=<%= htmlWebpackPlugin.options.config.version %>"></script>
+  <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+  <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>?v=<%= htmlWebpackPlugin.options.config.version %>"></script>
+<% } %>
 </body>
 </html>
