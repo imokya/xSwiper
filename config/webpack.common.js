@@ -72,4 +72,5 @@ module.exports = {
       root: path.resolve(__dirname, '../')
     })
   ],
+  performance: false
 }
