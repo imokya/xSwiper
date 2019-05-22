@@ -9,12 +9,14 @@ module.exports = {
     app: './src/app.js'
   },
   output: {
+    publicPath: config.publicPath,
     path: path.resolve(__dirname, '../build'),
     filename: 'js/[name].js'
   },
   resolve: {
     extensions: ['.js'],
     alias: {
+      img: path.resolve(__dirname, '../build/img'),
       root: path.resolve(__dirname, '../'),
       styles: path.resolve(__dirname, '../styles')
     }
@@ -34,9 +36,21 @@ module.exports = {
         use: {
           loader: 'html-loader',
           options: {
-            attrs: false
+            attrs: ['img:src', 'link:href']
           }
         }
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              emitFile: false,
+              name: 'img/[name].[ext]?v='+config.version
+            }
+          }
+        ]
       }
     ]
   },

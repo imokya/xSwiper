@@ -6,5 +6,6 @@
   ],
   "title": "xing h5",
   "version": "3",
-  "viewport": "750"
+  "viewport": "750",
+  "publicPath": "/" 
 }

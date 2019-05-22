@@ -33,7 +33,7 @@ const app = {
   getAssets(arr, assets) {
     arr.forEach((item) => {
       if(typeof(item) === 'string') {
-        assets.push(item)
+        assets.push(`${item}?v=${config.version}`)
       } else {
         this.getAssets(Object.values(item)[0], assets)
       }
@@ -108,7 +108,6 @@ const app = {
           const curSlide = app.slides[slideIndex]
           if(curSlide && curSlide.init) curSlide.init()
           router.go(curSlide.path)
-          alert(location.href)
           inited = true
         },
         slideChange() {
@@ -134,5 +133,6 @@ const app = {
 
 app.init()
 
+app.config = config
 app.router = router
 window.app = app
