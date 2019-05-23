@@ -1,9 +1,12 @@
-const merge = require('webpack-merge')
+const path = require('path')
 const glob = require('glob')
+const merge = require('webpack-merge')
+const commonConfig = require('./webpack.common.js')
+const TerserPlugin = require('terser-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const commonConfig = require('./webpack.common.js')
-const path = require('path')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
 
 const prodConfig =  {
   mode: 'production',
@@ -34,7 +37,8 @@ const prodConfig =  {
               modules: 'global',
               import: true
             }
-          }
+          },
+          'postcss-loader'
         ] 
       }
     ]
@@ -42,9 +46,12 @@ const prodConfig =  {
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
-      chunkFilename: 'css/[id].css'
+      chunkFilename: 'css/[name].css'
     })
-  ]
+  ],
+  optimization: {
+    minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin({})]
+  }
 }
 
 const imageCompressConfig =  {

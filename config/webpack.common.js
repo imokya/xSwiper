@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const config = require('../app.json')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
@@ -11,7 +12,8 @@ module.exports = {
   output: {
     publicPath: config.publicPath,
     path: path.resolve(__dirname, '../build'),
-    filename: 'js/[name].js'
+    filename: 'js/[name].js',
+    chunkFilename: 'js/vendors.js'
   },
   resolve: {
     extensions: ['.js'],
@@ -77,9 +79,19 @@ module.exports = {
       filename: 'index.html'
     }),
     new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['*', '!vendors*', '!img*'],
+      cleanOnceBeforeBuildPatterns: ['*', '!img*'],
       root: path.resolve(__dirname, '../')
     })
   ],
-  performance: false
+  performance: false,
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendors: {
+          test: /\.js$/
+        }
+      }
+    }
+  }
 }

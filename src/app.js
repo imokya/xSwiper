@@ -1,11 +1,16 @@
+import Swiper from 'swiper'
+import $ from 'zepto-webpack'
+import Wechat from './utils/wechat'
+
 import config from 'root/app.json'
 import manifest from './manifest.json'
 import Router from './utils/router'
 import Event from './utils/event'
+import 'swiper/dist/css/swiper.min.css'
 import 'styles/app.scss'
 
 
-let swiper, router
+let router, swiper
 
 const app = {
 
@@ -135,4 +140,5 @@ app.init()
 
 app.config = config
 app.router = router
+window.Wechat = Wechat
 window.app = app
