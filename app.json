@@ -5,7 +5,7 @@
     "pages/about"
   ],
   "title": "xing h5",
-  "version": "3",
+  "version": "1",
   "viewport": "750",
   "publicPath": "/" 
 }
