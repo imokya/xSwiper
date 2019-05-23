@@ -62,6 +62,15 @@ module.exports = {
       output: '../src'
     }),
     new HtmlWebpackPlugin({
+      minify: {
+        collapseWhitespace: true,
+        preserveLineBreaks: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true
+      },
       config: config,
       inject: false,
       template: 'template/index.ejs',
