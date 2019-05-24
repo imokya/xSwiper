@@ -20,7 +20,7 @@ module.exports = {
     alias: {
       img: path.resolve(__dirname, '../build/img'),
       root: path.resolve(__dirname, '../'),
-      styles: path.resolve(__dirname, '../styles')
+      styles: path.resolve(__dirname, '../src/styles')
     }
   },
   module: {
