@@ -13,7 +13,7 @@ module.exports = {
     publicPath: config.publicPath,
     path: path.resolve(__dirname, '../build'),
     filename: 'js/[name].js',
-    chunkFilename: 'js/vendors.js'
+    chunkFilename: 'js/[name].js'
   },
   resolve: {
     extensions: ['.js'],
@@ -85,11 +85,19 @@ module.exports = {
   ],
   performance: false,
   optimization: {
+    usedExports: true,
     splitChunks: {
       chunks: 'all',
+      name: true,
       cacheGroups: {
         vendors: {
-          test: /\.js$/
+          test: /\.js$/,
+          name: 'vendors'
+        },
+        styles: {
+          test: /\.(css|scss)$/,
+          name: 'styles',
+          enforce: true
         }
       }
     }

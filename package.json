@@ -1,8 +1,7 @@
 {
   "name": "xing-h5",
   "sideEffects": [
-    "*.css",
-    "*.scss"
+    "*.css", "*.scss"
   ],
   "version": "1.0.0",
   "description": "h5 framework",
