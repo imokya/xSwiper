@@ -7,7 +7,7 @@ import manifest from './manifest.json'
 import Router from './utils/router'
 import Event from './utils/event'
 import 'swiper/dist/css/swiper.min.css'
-import 'styles/app.scss'
+import 'styles/app.styl'
 
 
 let router, swiper
@@ -58,7 +58,7 @@ const app = {
       const tempEl = document.createElement('div')
       const el = require(`root/${page}/index.html`)
       const slide = require(`root/${page}/index`)
-      const style = require(`root/${page}/index.scss`)
+      const style = require(`root/${page}/index.styl`)
       tempEl.innerHTML = el
       if(Object.keys(style).length > 0) {
         const c1 = Object.keys(style)[0]

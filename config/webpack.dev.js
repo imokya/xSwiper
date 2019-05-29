@@ -14,7 +14,7 @@ const devConfig =  {
   module: {
     rules: [
       { 
-        test: /\.scss$/,
+        test: /\.styl$/,
         use: [
           'style-loader',
           {
@@ -24,8 +24,8 @@ const devConfig =  {
               import: true
             }
           },
-          'sass-loader',
-          'postcss-loader'
+          'postcss-loader',
+          'stylus-loader'
         ] 
       },
       { 

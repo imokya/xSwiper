@@ -94,7 +94,7 @@ module.exports = {
           name: 'vendors'
         },
         styles: {
-          test: /\.(css|scss)$/,
+          test: /\.css|styl?$/,
           name: 'styles',
           enforce: true
         }

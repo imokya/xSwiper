@@ -13,7 +13,7 @@ const prodConfig =  {
   module: {
     rules: [
       { 
-        test: /\.scss$/,
+        test: /\.styl$/,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -23,8 +23,8 @@ const prodConfig =  {
               import: true
             }
           },
-          'sass-loader',
-          'postcss-loader'
+          'postcss-loader',
+          'stylus-loader'
         ] 
       },
       { 
