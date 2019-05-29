@@ -60,7 +60,6 @@ module.exports = {
     new ManifestWebpackPlugin({
       disable: false,
       source: '../build/img',
-      exclude: 'exclude',
       output: '../src'
     }),
     new HtmlWebpackPlugin({
