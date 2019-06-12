@@ -87,16 +87,14 @@ module.exports = {
     usedExports: true,
     splitChunks: {
       chunks: 'all',
-      name: true,
       cacheGroups: {
         vendors: {
-          test: /\.js$/,
+          test: /node_modules|vendors/,
           name: 'vendors'
         },
         styles: {
-          test: /\.css|styl?$/,
-          name: 'styles',
-          enforce: true
+          test: /\.(css|styl)$/,
+          name: 'styles'
         }
       }
     }
