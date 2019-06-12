@@ -49,7 +49,8 @@ module.exports = {
             loader: 'file-loader',
             options: {
               emitFile: false,
-              name: 'img/[name].[ext]?v='+config.version
+              context: path.resolve(__dirname, '../build/img'),
+              name: 'img/[path][name].[ext]?v='+config.version
             }
           }
         ]
