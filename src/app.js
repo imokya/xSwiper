@@ -6,7 +6,7 @@ import config from 'root/app.json'
 import manifest from './manifest.json'
 import Router from './utils/router'
 import Event from './utils/event'
-import 'swiper/dist/css/swiper.min.css'
+import 'swiper/css/swiper.min.css'
 import 'styles/app.styl'
 
 
