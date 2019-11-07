@@ -82,7 +82,7 @@ export default {
 
   async _loadTerm() {
     this.dialog.el.removeClass('hide')
-    const res = await axios.get('./term.html')
+    const res = await axios.get('term.html')
     const el = this.dialog.el.find('.term-content')
     el.html(res.data)
     setTimeout(() => {

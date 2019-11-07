@@ -33,6 +33,10 @@ class Alert {
     }, 1000)
   }
 
+  destroy() {
+    this.el.remove()
+  }
+
 }
 
 export default new Alert

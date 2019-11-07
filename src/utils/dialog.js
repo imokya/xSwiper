@@ -9,6 +9,7 @@ class Dialog {
   }
 
   _initDom() {
+    $('.overlay').remove()
     this.overlay = $('<div>').addClass('hide overlay')
     this.overlay.append(this.conf.el)
     this.overlay.css({
@@ -40,6 +41,11 @@ class Dialog {
     this.overlay.addClass('fadeIn')
     this.overlay.removeClass('hide')
     this.el.removeClass('hide')
+  }
+
+  destroy() {
+    this.overlay.remove()
+    this.el.remove()
   }
 
 }
