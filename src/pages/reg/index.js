@@ -110,6 +110,8 @@ export default {
   destroy() {
     this._destroyScroll()
     this.el.off()
+    this.dialog.destroy()
+    this.dialog = null
     $(document).off()
   }
   

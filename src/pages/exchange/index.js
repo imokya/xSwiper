@@ -44,6 +44,10 @@ export default {
 
   destroy() {
     this.el.off()
+    this.successDialog.destroy()
+    this.successDialog = null
+    this.failDialog.destroy()
+    this.failDialog = null
   }
   
 }

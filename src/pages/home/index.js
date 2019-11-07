@@ -25,6 +25,8 @@ export default {
 
   destroy() {
     this.el.off()
+    this.dialog.destroy()
+    this.dialog = null
   }
   
 }

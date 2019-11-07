@@ -11,7 +11,7 @@ import './css/app.styl'
 import global from './global'
 
 let router, swiper
-const speed = 500
+const speed = 600
 
 const app = {
 
