@@ -23,10 +23,20 @@
   </div>
   <audio src="/assets/music.mp3" autoplay="autoplay" id="music"></audio>
   <script>
+    var audio = document.querySelector('#music')
     document.addEventListener('WeixinJSBridgeReady', function() {
-      var audio = document.querySelector('#music')
       audio.play()
-    }, false)
+    })
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) {
+        audio.pause()
+      } 
+    })
+    document.addEventListener('webkitvisibilitychange', function() {
+      if (document.hidden) {
+        audio.pause()
+      } 
+    })
   </script>
   <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
   <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>?v=<%= htmlWebpackPlugin.options.config.version %>"></script>

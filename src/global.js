@@ -1,7 +1,10 @@
+import rotate from 'src/utils/rotate'
+
 export default {
 
   init() {
     this._bindEvent()
+    rotate.init()
   },
 
   _bindEvent() {
