@@ -1,0 +1,83 @@
+.page.claim
+  background-image: url('~img/claim/bg.jpg');
+  .collection
+    width: 680px;
+    height: 200px;
+    margin: 0 auto;
+    margin-top: 363px;
+    overflow: hidden;
+    ul 
+      width: 500px;
+      margin: 0 auto;
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-around;
+      li
+        height: 100px;
+        width: 100px;
+        position: relative;
+        span 
+          display: block;
+          position: absolute;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background-color: #42d5ff;
+          right: 5px;
+          text-align: center;
+          line-height: 30px;
+          color: #000;
+          font-size: 18px;
+  .button
+    width: 306px;
+    height: 80px;
+    margin-top: 45px;
+    &.back
+      left: -330px;
+      background: url('~img/claim/btn-back.png') no-repeat;
+    &.save
+      left: 330px;
+      background: url('~img/claim/btn-save.png') no-repeat;
+
+.claim-form
+  width: 491px;
+  height: 411px;
+  margin: 0 auto;
+  margin-top: 50px;
+  background: url('~img/claim/form.png') no-repeat;
+  overflow: hidden;
+  & > div
+    height: 63px;
+    width: 338px;
+    margin-left: 150px;
+    margin-top: 23px;
+    input 
+      border: none;
+      background: none;
+      padding: 10px 20px;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      color: #c4d625;
+      font-size: 22px;
+    &.sex 
+      display: flex;
+      div
+        width: 80px;
+        height: 50px;
+        margin-left: 30px;
+        position: relative;
+        &::after 
+          content: '';
+          position: absolute;
+          top: 7px;
+          left: -8px;
+          width: 50px;
+          height: 50px;
+          background: url('~img/claim/check_1.png') no-repeat;
+        &.active
+          &::after
+            background: url('~img/claim/check_2.png') no-repeat;
+      
+
+  

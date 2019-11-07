@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title><%= htmlWebpackPlugin.options.config.title %></title>
+  <% if (htmlWebpackPlugin.options.config.viewport == 'device') { %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <% } else { %>
+    <meta name="viewport" content="width=<%= htmlWebpackPlugin.options.config.viewport %>, user-scalable=no, target-densitydpi=device-dpi">
+  <% } %>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no"> 
+  <meta name="x5-orientation" content="portrait">
+  <meta name="x5-fullscreen" content="true">
+  <% for (var css in htmlWebpackPlugin.files.css) { %>
+    <link href="<%= htmlWebpackPlugin.files.css[css] %>?v=<%= htmlWebpackPlugin.options.config.version %>" rel="stylesheet">
+  <% } %>
+</head>
+<body>
+  <div id="app"></div>
+  <div class="headup">
+    <div class="headup-music"></div>
+  </div>
+  <audio src="/assets/music.mp3" autoplay="autoplay" id="music"></audio>
+  <script>
+    document.addEventListener('WeixinJSBridgeReady', function() {
+      var audio = document.querySelector('#music')
+      audio.play()
+    }, false)
+  </script>
+  <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+  <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>?v=<%= htmlWebpackPlugin.options.config.version %>"></script>
+<% } %>
+</body>
+</html>

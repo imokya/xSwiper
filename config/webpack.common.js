@@ -4,6 +4,7 @@ const config = require('../app.json')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const ManifestWebpackPlugin = require('../plugins/manifest-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -18,9 +19,11 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
     alias: {
-      img: path.resolve(__dirname, '../build/img'),
+      img: path.resolve(__dirname, '../src/img'),
+      assets: path.resolve(__dirname, '../src/assets'),
       root: path.resolve(__dirname, '../'),
-      styles: path.resolve(__dirname, '../src/styles')
+      src: path.resolve(__dirname, '../src'),
+      css: path.resolve(__dirname, '../src/css')
     }
   },
   module: {
@@ -48,9 +51,10 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              emitFile: false,
-              context: path.resolve(__dirname, '../build/img'),
-              name: 'img/[path][name].[ext]?v='+config.version
+              emitFile: true,
+              limit: 8192,
+              context: 'src',
+              name: '[path][name].[ext]?v='+config.version
             }
           }
         ]
@@ -60,7 +64,7 @@ module.exports = {
   plugins: [
     new ManifestWebpackPlugin({
       disable: false,
-      source: '../build/img',
+      source: '../src/img',
       output: '../src'
     }),
     new HtmlWebpackPlugin({
@@ -75,13 +79,18 @@ module.exports = {
       },
       config: config,
       inject: false,
-      template: 'template/index.ejs',
+      template: 'src/index.ejs',
       filename: 'index.html'
     }),
     new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['*', '!img*'],
+      cleanOnceBeforeBuildPatterns: ['*'],
       root: path.resolve(__dirname, '../')
-    })
+    }),
+    new CopyPlugin([
+      { from: 'src/term.html', to: 'term.html' },
+      { from: 'src/img', to: 'img' },
+      { from: 'src/assets', to: 'assets' },
+    ]),
   ],
   performance: false,
   optimization: {

@@ -3,7 +3,7 @@ const glob = require('glob')
 const merge = require('webpack-merge')
 const commonConfig = require('./webpack.common.js')
 const TerserPlugin = require('terser-webpack-plugin');
-const ImageminPlugin = require('imagemin-webpack-plugin').default
+//const ImageminPlugin = require('imagemin-webpack-plugin').default
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
@@ -54,19 +54,19 @@ const prodConfig =  {
   }
 }
 
-const imageCompressConfig =  {
-  plugins: [
-    new ImageminPlugin({
-      pngquant: {
-        quality: '60-70'
-      },
-      externalImages: {
-        context: '../build', 
-        sources: glob.sync('build/img/**/*.png')
-      }
-    })
-  ]
-}
+// const imageCompressConfig =  {
+//   plugins: [
+//     new ImageminPlugin({
+//       pngquant: {
+//         quality: '60-70'
+//       },
+//       externalImages: {
+//         context: '../build', 
+//         sources: glob.sync('build/img/**/*.png')
+//       }
+//     })
+//   ]
+// }
 
 const config = merge(commonConfig, prodConfig)
 

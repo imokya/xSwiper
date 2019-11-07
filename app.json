@@ -1,11 +1,19 @@
 {
   "pages": [
+    "pages/puzzle",
     "pages/home",
-    "pages/story",
-    "pages/about"
+    "pages/reg",
+    "pages/rule",
+    "pages/callin",
+    "pages/award",
+    "pages/exchange",
+    "pages/unlock",
+    
+    "pages/claim"
   ],
-  "title": "xing h5",
+  "title": "黄景瑜超A庆生会",
   "version": "1",
   "viewport": "750",
-  "publicPath": "/" 
+  "publicPath": "/",
+  "hash": false
 }

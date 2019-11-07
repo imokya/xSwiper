@@ -7,10 +7,11 @@ import manifest from './manifest.json'
 import Router from './utils/router'
 import Event from './utils/event'
 import 'swiper/css/swiper.min.css'
-import 'styles/app.styl'
-
+import './css/app.styl'
+import global from './global'
 
 let router, swiper
+const speed = 450
 
 const app = {
 
@@ -22,12 +23,19 @@ const app = {
   },
 
   initRouter() {
-    router = new Router()
+    router = new Router({
+      mode: config.hash ? 'hash' : ''
+    })
     router.add(':path', (path)=> {
       const index = this.slidePaths.indexOf(path)
       swiper.slideTo(index)
     })
     router.listen()
+  },
+
+  go(path) {
+    const index = this.slidePaths.indexOf(path)
+    swiper.slideTo(index, speed)
   },
 
   initAssets() {
@@ -56,9 +64,9 @@ const app = {
 
     config.pages.forEach((page) => {
       const tempEl = document.createElement('div')
-      const el = require(`root/${page}/index.html`)
-      const slide = require(`root/${page}/index`)
-      const style = require(`root/${page}/index.styl`)
+      const el = require(`root/src/${page}/index.html`)
+      const slide = require(`root/src/${page}/index`)
+      const style = require(`root/src/${page}/index.styl`)
       tempEl.innerHTML = el
       if(Object.keys(style).length > 0) {
         const c1 = Object.keys(style)[0]
@@ -66,7 +74,6 @@ const app = {
         tempEl.firstChild.classList.add(c1, c2)
       } 
       slide.default.app = app
-      slide.default.el = tempEl.firstChild
       const slidePath = page.split('/')[1]
       slide.default.path = slidePath
       this.initPageAssets(slide.default, page)
@@ -96,12 +103,15 @@ const app = {
     const path = router.path.split('/')[0] || 
                  this.slidePaths[0]
     const slideIndex = this.slidePaths.indexOf(path)
-    let inited = false
-    swiper = new Swiper('.swiper-container', {
-      effect: 'fade',
+    this.swiper = swiper = new Swiper('.swiper-container', {
+      speed,
+      effect: 'cube',
+      allowTouchMove: false,
+      runCallbacksOnInit: false,
+      preventInteractionOnTransition: true,
       initialSlide: slideIndex,
       fadeEffect: {
-        crossFade: true
+        crossFade: false
       },
       direction: 'vertical',
       loop: false,
@@ -111,31 +121,37 @@ const app = {
       on: {
         init() {
           const curSlide = app.slides[slideIndex]
-          if(curSlide && curSlide.init) curSlide.init()
+          curSlide.el = this.slides[slideIndex].firstChild
+          if (curSlide) {
+            curSlide.init && curSlide.init()
+            curSlide.mounted && curSlide.mounted()
+          }
           router.go(curSlide.path)
-          inited = true
         },
         slideChange() {
-          if(inited) {
-            const curSlide = app.slides[swiper.activeIndex]
-            if(curSlide && curSlide.init) curSlide.init()
-            router.go(curSlide.path)
+          const curSlide = app.slides[this.activeIndex]
+          if (curSlide) {
+            curSlide.init && curSlide.init()
           }
+          router.go(curSlide.path)
         },
         slideChangeTransitionEnd() {
-          if(inited) {
-            const curSlide = app.slides[swiper.activeIndex]
-            const preSlide = app.slides[swiper.previousIndex] 
-            if(preSlide && preSlide.destroy) preSlide.destroy()
-            if(curSlide && curSlide.start) curSlide.start()
-          }
-          inited = true
+          const preSlide = app.slides[this.previousIndex] 
+          if (preSlide && preSlide.destroy) preSlide.destroy()
+        },
+        slideChangeTransitionStart() {
+          const curSlide = app.slides[this.activeIndex] 
+          curSlide.el = document.querySelector('.swiper-slide-active').firstChild
+          if (curSlide && curSlide.mounted) curSlide.mounted()
         }
       }
     })
+
   }
+
 }
 
+global.init()
 app.init()
 
 app.config = config

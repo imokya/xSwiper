@@ -1,0 +1,117 @@
+* 
+  margin: 0;
+  padding: 0;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+
+html, body 
+  height: 100%;
+  overflow: hidden;
+  font-size: 30px;
+  line-height: 1.5;
+  -webkit-overflow-scrolling: touch;
+
+body 
+  font-family: 'helvetica neue', helvetica, sans-serif;
+  background-color: #0d1023;
+
+a 
+  text-decoration: none;
+
+ul {
+  list-style: none;
+}
+
+::-webkit-input-placeholder 
+  color: #808c22;
+
+/*-- util --*/
+.hide 
+  display: none !important;
+
+.abs 
+  position: absolute;
+
+.centerX
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+
+.center {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.button {
+  display: block;
+  cursor: pointer;
+}
+
+/*-- page --*/
+.page 
+  width: 750px;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: cover;
+  overflow: hidden;
+
+.page .logo 
+  top: -2px;
+  width: 287px;
+  height: 149px;
+  background: url('~img/logo.png') no-repeat;
+
+/*-- transition --*/
+.fadeIn 
+  animation fadeIn .3s ease-out
+
+@keyframes fadeIn
+  0% 
+    opacity: 0
+  100%　
+    opacity: 100
+
+/*-- app --*/
+#app 
+  height: 100%;
+
+.dialog 
+  width: 750px;
+  height: 100%;
+
+/*--- swiper --*/
+.swiper-container 
+  height: 100%;
+
+.swiper-wrapper 
+  height: 100%;
+
+.swiper-slide 
+  height: 100%;
+  & > div 
+    height: 100%;
+  
+
+/*-- headup --*/
+.headup 
+  width: 750px;
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  .headup-music
+    position: absolute;
+    width: 59px;
+    height: 55px;
+    top: 30px;
+    right: 30px;
+    background: url('~img/music-on.png') center center no-repeat;
+    &.off
+      background: url('~img/music-off.png') center center no-repeat;
+
+
+

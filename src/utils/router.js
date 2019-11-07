@@ -14,7 +14,8 @@ class Router extends Event {
   }
 
   go(path) {
-    location.hash = _options.prefix + path
+    if (_options.mode === 'hash')
+      location.hash = _options.prefix + path
   }
 
   check() {
