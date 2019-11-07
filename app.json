@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/puzzle",
     "pages/home",
     "pages/reg",
     "pages/rule",
@@ -8,7 +7,7 @@
     "pages/award",
     "pages/exchange",
     "pages/unlock",
-    
+    "pages/puzzle",
     "pages/claim"
   ],
   "title": "黄景瑜超A庆生会",
