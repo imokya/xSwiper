@@ -6,7 +6,6 @@ export default {
   },
 
   _bindEvent() {
-    console.log(window)
     $(window).on('orientationchange', (e) => {
       console.log(window.orientation % 90)
       const ori = window.orientation
@@ -29,6 +28,7 @@ export default {
       background: '#000'
     })
     const tipEl = $('<div>')
+    const imgURL = require('img/rotate.png')
     tipEl.css({
       width: '194px',
       height: '183px',
@@ -38,7 +38,7 @@ export default {
       right: 0,
       bottom: 0,
       top: 0,
-      background: `url(img/rotate.png) no-repeat`
+      background: `url(${imgURL}) no-repeat`
     })
     el.append(tipEl)
     $('body').append(el)
