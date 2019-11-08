@@ -1,5 +1,6 @@
 {
   "pages": [
+    
     "pages/home",
     "pages/reg",
     "pages/rule",

@@ -1,8 +1,8 @@
-class Dialog {
+class LoadingDialog {
 
   constructor(_conf) {
     this.conf = Object.assign({
-      cancel: true
+      cancel: false
     }, _conf)
     this._initDom()
     this._bindEvent()
@@ -17,7 +17,6 @@ class Dialog {
   _initDom() {
     this._cleanup()
     this.overlay = $('<div>').addClass('hide overlay')
-    this.overlay.append(this.conf.el)
     this.overlay.css({
       top: 0,
       zIndex: 20,
@@ -26,8 +25,31 @@ class Dialog {
       position: 'absolute',
       backgroundColor: 'rgba(0, 0, 0, 0.95)'
     })
+    const el = $('<div>').addClass('dialog dialog-loading hide center abs')
+    el.css({
+      width: '589px',
+      height: '182px',
+      color: '#fff',
+      background: 'url(img/loading.png) no-repeat'
+    })
+    const spinnerEl = $('<div>').addClass('spinner')
+    spinnerEl.css({
+      marginRight: '30px'
+    })
+    el.append(spinnerEl)
+    const loadingMsgEl =  $('<div>').addClass('loading-msg')
+    loadingMsgEl.html(this.conf.title)
+    el.append(loadingMsgEl)
+    this.overlay.append(el)
     $('#app').append(this.overlay)
-    this.el = this.conf.el
+    this.spinnerEl = spinnerEl
+    this.loadingMsgEl = loadingMsgEl
+    this.el = el
+  }
+
+  done() {
+    this.spinnerEl.remove()
+    this.loadingMsgEl.html('操作成功')
   }
 
   _bindEvent() {
@@ -50,13 +72,13 @@ class Dialog {
   }
 
   destroy() {
-    if (this.overlay) {
+    if(this.overlay) {
       this.overlay.off()
       this.overlay.remove()
     }
-    this.el && this.el.remove()
+  　this.el && this.el.remove()
   }
 
 }
 
-export default Dialog
+export default LoadingDialog

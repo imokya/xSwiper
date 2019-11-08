@@ -11,16 +11,12 @@ export default {
   },
 
   _createDialog() {
-    if (!this.successDialog) {
-      this.successDialog = new Dialog({
-        el: $('<div>').addClass('dialog-exchange-success abs center hide')
-      })
-    }
-    if (!this.failDialog) {
-      this.failDialog = new Dialog({
-        el: $('<div>').addClass('dialog-exchange-fail abs center hide')
-      })
-    }
+    this.successDialog = new Dialog({
+      el: $('<div>').addClass('dialog-exchange-success abs center hide')
+    })
+    this.failDialog = new Dialog({
+      el: $('<div>').addClass('dialog-exchange-fail abs center hide')
+    })
   },
 
   _bindEvent() {
@@ -39,15 +35,12 @@ export default {
       Alert.show('请输入兑换码')
       return
     }
+    this._createDialog()
     this.failDialog.show()
   },
 
   destroy() {
     this.el.off()
-    this.successDialog.destroy()
-    this.successDialog = null
-    this.failDialog.destroy()
-    this.failDialog = null
   }
   
 }

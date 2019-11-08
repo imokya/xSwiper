@@ -4,16 +4,18 @@ export default {
 
   mounted() {
     this.el = $(this.el)
-    if (!this.dialog) {
-      this.dialog = new Dialog({
-        el: $('<div>').addClass('dialog-checkin-success abs center hide')
-      })
-    }
     this._bindEvent()
+  },
+
+  _createDialog() {
+    this.dialog = new Dialog({
+      el: $('<div>').addClass('dialog-checkin-success abs center hide')
+    })
   },
 
   _bindEvent() {
     this.el.on('click', '.button.checkin', (e) => {
+      this._createDialog()
       this.dialog.show()
     })
     this.el.on('click', '.button.exchange', (e) => {
@@ -26,8 +28,6 @@ export default {
 
   destroy() {
     this.el.off()
-    this.dialog.destroy()
-    this.dialog = null
   }
   
 }

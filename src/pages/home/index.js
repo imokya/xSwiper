@@ -9,12 +9,9 @@ export default {
   },
 
   _createDialog() {
-    if (!this.dialog) {
-      this.dialog = new Dialog({
-        el: $('<div>').addClass('dialog dialog-info-tip abs center hide')
-      })
-    }
-    //this.dialog.show()
+    this.dialog = new Dialog({
+      el: $('<div>').addClass('dialog dialog-info-tip abs center hide')
+    })
   },
 
   _bindEvent() {
@@ -25,8 +22,6 @@ export default {
 
   destroy() {
     this.el.off()
-    this.dialog.destroy()
-    this.dialog = null
   }
   
 }

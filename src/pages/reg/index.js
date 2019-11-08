@@ -10,18 +10,21 @@ export default {
 
   mounted() {
     this.el = $(this.el)
+    this.dialogEl = this.el.find('.dialog')
     this.count = COUNT_TIME  
-    if (!this.dialog) {
-      this.dialog = new Dialog({
-        cancel: false,
-        el: $(this.el).find('.dialog')
-      })  
-    }
     this._bindEvent()
+  },
+
+  _createDialog() {
+    this.dialog = new Dialog({
+      cancel: false,
+      el: this.dialogEl
+    })  
   },
 
   _bindEvent() {
     this.el.on('click', '.reg-term', (e) => {
+      this._createDialog()
       this.dialog.show()
       this._loadTerm()
     })
@@ -77,7 +80,7 @@ export default {
   _setTerm() {
     const el = this.el.find('.reg-term')
     agree ? el.addClass('agree') : el.removeClass('agree')
-    this.dialog.hide()
+    this.dialog.destroy()
   },
 
   async _loadTerm() {
@@ -110,8 +113,6 @@ export default {
   destroy() {
     this._destroyScroll()
     this.el.off()
-    this.dialog.destroy()
-    this.dialog = null
     $(document).off()
   }
   
