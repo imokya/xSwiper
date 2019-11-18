@@ -1,7 +1,9 @@
 # xing-h5
 基于webpack构建的脚手架，可以用来方便的创建手机端单页web app项目，持续完善中。
 
-### 改仓库已废弃，停止更新
+### 此仓库已废弃，停止更新
+
+[请移步](https://github.com/imokya/xSlider)
 
 ### Features
 * 支持页面事件
