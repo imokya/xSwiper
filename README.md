@@ -3,7 +3,7 @@
 
 ### 此仓库已废弃，停止更新
 
-[请移步xSlider](https://github.com/imokya/xSlider)
+[请移步新地址](https://github.com/imokya/xSlider)
 
 ### Features
 * 支持页面事件
