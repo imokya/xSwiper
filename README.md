@@ -1,9 +1,7 @@
-# xing-h5
+# xSwiper
 基于webpack构建的脚手架，可以用来方便的创建手机端单页web app项目，持续完善中。
 
-### 此仓库已废弃，停止更新
-
-[请移步新地址](https://github.com/imokya/xSlider)
+[不依赖swiper版本](https://github.com/imokya/xSlider)
 
 ### Features
 * 支持页面事件
